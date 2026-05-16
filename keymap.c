@@ -88,7 +88,8 @@ enum {
   TD_MIN_SLH,
   TD_PRT_SCR,
   TD_RFS_BWR,
-  TD_MAC_CTL
+  TD_MAC_CTL,
+  TD_QUO_DBL
 };
 
 tap_dance_action_t tap_dance_actions[] = {
@@ -103,7 +104,7 @@ tap_dance_action_t tap_dance_actions[] = {
   // KC_LPAD on single tap, KC_MCTL on double
   [TD_MAC_CTL] = ACTION_TAP_DANCE_DOUBLE(KC_LPAD, KC_MCTL),
   // Space on single tap, Tab on double
-  //[TD_SPC_TAB] = ACTION_TAP_DANCE_DOUBLE(KC_SPC, KC_TAB)
+  [TD_QUO_DBL] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_DQT)
 };
 
 //Tap dance alias
@@ -112,7 +113,7 @@ tap_dance_action_t tap_dance_actions[] = {
 #define PRT_SCR TD(TD_PRT_SCR)
 #define RFS_BWR TD(TD_RFS_BWR)
 #define MAC_CTL TD(TD_MAC_CTL)
-//#define SPC_TAB TD(TD_SPC_TAB)
+#define QUO_DBL TD(TD_QUO_DBL)
 
 
 
@@ -151,7 +152,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    [_NUMBERS] = LAYOUT_split_3x5_2(
         //|--------------------------------------------|       |--------------------------------------------|
            KC_7,     KC_8,    KC_9,    PLS_STR, KC_LPRN,        RFS_BWR, PRT_SCR, XXXXXXX, XXXXXXX,  QK_GESC,
-           KC_4,     KC_5,    KC_6,    MIN_SLH, KC_RPRN,        KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, KC_QUOT,
+           KC_4,     KC_5,    KC_6,    MIN_SLH, KC_RPRN,        KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, QUO_DBL,
            KC_1,     KC_2,    KC_3,    KC_0,    KC_EQL,         KC_HOME, KC_PGDN, KC_PGUP, KC_END,   MAC_CTL,
         //|--------------------------------------------|       |--------------------------------------------|
                                       _______, QK_LLCK,         _______, MO(_CONFIG)
