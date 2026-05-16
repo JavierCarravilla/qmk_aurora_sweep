@@ -164,7 +164,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,        KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS,
             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,        KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE,
         //|--------------------------------------------|       |-------------------------------------------|
-                                   MO(_CONFIG),_______,         _______, _______
+                                   MO(_CONFIG),QK_LLCK,         _______, _______
                        //|-----------------------------|       |----------------------------|
    ),
 
