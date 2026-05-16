@@ -19,6 +19,10 @@
 #    include "keymap.h"
 #endif
 
+enum custom_keycodes {
+  DBG_EVA = SAFE_RANGE,
+  SEL_COL
+};
 
 enum layer_names {
    _QWERTY,
@@ -79,6 +83,14 @@ void reset_dance_refresh_browser(tap_dance_state_t *state, void *user_data) {
 };
 
 // Tap Dance definitions
+enum {
+  TD_PLS_STR,
+  TD_MIN_SLH,
+  TD_PRT_SCR,
+  TD_RFS_BWR,
+  TD_MAC_CTL
+};
+
 tap_dance_action_t tap_dance_actions[] = {
   // + on single tap and * with double
   [TD_PLS_STR] = ACTION_TAP_DANCE_DOUBLE(KC_PLUS, KC_ASTR),
@@ -148,9 +160,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
    [_SYMBOLS] = LAYOUT_split_3x5_2(
         //|--------------------------------------------|       |-------------------------------------------|
-            KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,        KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN
-            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,        KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS
-            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,        KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE
+            KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,        KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,
+            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,        KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS,
+            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,        KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE,
         //|--------------------------------------------|       |-------------------------------------------|
                                    MO(_CONFIG),_______,         _______, _______
                        //|-----------------------------|       |----------------------------|
@@ -167,15 +179,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                        //|-----------------------------|       |----------------------------|
    ),
 
-   [_CONFIG] = LAYOUT_split_3x5_2(
-        //|--------------------------------------------|       |--------------------------------------------|
-            QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-            RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX,        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-            RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX,        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-        //|--------------------------------------------|       |--------------------------------------------|
-                                        _______,XXXXXXX,        XXXXXXX, _______
-                        //|----------------------------|       |----------------------------|
-   )
+  [_CONFIG] = LAYOUT_split_3x5_2(
+    QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    UG_TOGG, UG_HUEU, UG_SATU, UG_VALU, UG_NEXT,        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX,  UG_HUED, UG_SATD, UG_VALD, UG_PREV,        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                                        _______, XXXXXXX,        XXXXXXX, _______
+)
+
 };
 
 // https://docs.qmk.fm/features/os_detection
@@ -203,7 +213,7 @@ bool process_detected_host_os_kb(os_variant_t detected_os) {
         case OS_UNSURE:
             break;
     }
-    
+
     return true;
 }
 

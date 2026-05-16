@@ -27,7 +27,7 @@ jobs:
         submodules: recursive
 
     - name: Checkout keymap
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         path: keyboards/splitkb/aurora/corne/keymaps/${{ matrix.keymap }}
 
