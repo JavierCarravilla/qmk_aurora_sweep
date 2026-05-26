@@ -104,7 +104,7 @@ tap_dance_action_t tap_dance_actions[] = {
   // KC_LPAD on single tap, KC_MCTL on double
   [TD_MAC_CTL] = ACTION_TAP_DANCE_DOUBLE(KC_LPAD, KC_MCTL),
   // Space on single tap, Tab on double
-  [TD_QUO_DBL] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_DQT)
+  [TD_QUO_DBL] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_DQT),
 };
 
 //Tap dance alias
@@ -141,7 +141,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
    [_FUNCTIONS] = LAYOUT_split_3x5_2(
         //|--------------------------------------------|       |--------------------------------------------|
-            KC_ESC,   KC_TAB, _______, _______, _______,        _______, _______, _______, KC_BSPC, MO(_FUNCTIONS),
+            QK_GESC,   KC_TAB, RFS_BWR, PRT_SCR, _______,        _______, _______, _______, KC_BSPC, MO(_FUNCTIONS),
             _______, _______, _______, _______, _______,        _______, _______, _______, _______, _______,
             _______, _______, _______, _______, _______,        _______, _______, _______, _______, _______,
         //|--------------------------------------------|       |--------------------------------------------|
@@ -151,9 +151,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
    [_NUMBERS] = LAYOUT_split_3x5_2(
         //|--------------------------------------------|       |--------------------------------------------|
-           KC_7,     KC_8,    KC_9,    PLS_STR, KC_LPRN,        RFS_BWR, PRT_SCR, XXXXXXX, XXXXXXX,  QK_GESC,
-           KC_4,     KC_5,    KC_6,    MIN_SLH, KC_RPRN,        KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, QUO_DBL,
-           KC_1,     KC_2,    KC_3,    KC_0,    KC_EQL,         KC_HOME, KC_PGDN, KC_PGUP, KC_END,   MAC_CTL,
+           KC_1,     KC_2,    KC_3,    KC_4,    KC_5,           KC_6,    KC_7,    KC_8,    KC_9,     KC_0,
+           _______, _______, _______, _______,  XXXXXXX,        KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, QUO_DBL,
+           PLS_STR,  MIN_SLH, KC_LPRN, KC_RPRN, KC_EQL,         KC_HOME, KC_PGDN, KC_PGUP, KC_END,   MAC_CTL,
         //|--------------------------------------------|       |--------------------------------------------|
                                       _______, QK_LLCK,         _______, MO(_CONFIG)
                        //|-----------------------------|       |----------------------------|
@@ -172,7 +172,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    [_MOUSE] = LAYOUT_split_3x5_2(
         //|--------------------------------------------|       |-------------------------------------------|
             RM_TOGG, RM_NEXT, RM_HUEU, RM_SATU, RM_VALU,        RM_SPDU, MS_BTN1, MS_WHLU, MS_BTN2, XXXXXXX,
-            XXXXXXX, MS_BTN2, KC_NO  , MS_BTN1, XXXXXXX,        XXXXXXX, MS_LEFT, MS_DOWN, MS_UP  , MS_RGHT,
+            XXXXXXX, MS_BTN2, KC_NO  , MS_BTN1, XXXXXXX,        MS_LEFT, MS_DOWN, MS_UP  , MS_RGHT, XXXXXXX,
             XXXXXXX, RM_PREV, RM_HUED, RM_SATD, RM_VALD,        RM_SPDD, MS_WHLL, MS_WHLD, MS_WHLR, XXXXXXX,
         //|--------------------------------------------|       |-------------------------------------------|
                                        _______, QK_LLCK,        MO(_MOUSE), _______

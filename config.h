@@ -21,27 +21,22 @@
 #define MK_3_SPEED
 #define MK_MOMENTARY_ACCEL
 
-#define MK_C_OFFSET_0 1
-#define MK_C_INTERVAL_0 12
+/* Delay antes de repetir movimiento */
+#define MOUSEKEY_DELAY 500
 
-#define MK_C_OFFSET_1 4
-#define MK_C_INTERVAL_1 18
+/* Intervalo base entre movimientos */
+#define MOUSEKEY_INTERVAL 20
 
-#define MK_C_OFFSET_UNMOD 13
-#define MK_C_INTERVAL_UNMOD 15
+/* Velocidad máxima */
+#define MOUSEKEY_MAX_SPEED 4
 
-#define MK_C_OFFSET_2 25
-#define MK_C_INTERVAL_2 10
+/* Tiempo hasta velocidad máxima */
+#define MOUSEKEY_TIME_TO_MAX 80
 
-#define MK_W_OFFSET_0 1
-#define MK_W_INTERVAL_0 160
+/* Wheel */
 
-#define MK_W_OFFSET_1 2
-#define MK_W_INTERVAL_1 120
-
-#define MK_W_OFFSET_UNMOD 4
-#define MK_W_INTERVAL_UNMOD 70
-
-#define MK_W_OFFSET_2 10
-#define MK_W_INTERVAL_2 30
+#define MOUSEKEY_WHEEL_DELAY 100
+#define MOUSEKEY_WHEEL_INTERVAL 80
+#define MOUSEKEY_WHEEL_MAX_SPEED 3
+#define MOUSEKEY_WHEEL_TIME_TO_MAX 60
 
