@@ -55,32 +55,40 @@ enum layer_names {
 
 // Tap dance functions
 void dance_prt_scr(tap_dance_state_t *state, void *user_data) {
-  if (state->count == 1) {
-    // Print screen to clipboard
-    SEND_STRING(SS_DOWN(X_LSFT) SS_DOWN(X_LCTL) SS_DOWN(X_PSCR));
-  } else if (state->count >= 1) {
-    // Print screen to save dialog
-    SEND_STRING(SS_DOWN(X_LSFT) SS_DOWN(X_PSCR));
-  }
-  clear_keyboard();
-};
+    bool is_mac = IS_LAYER_ON(_HOMEROW_MACOS);
 
-void start_dance_refresh_browser(tap_dance_state_t *state, void *user_data) {
-  // F5 shortcut to refresh the browser
-  if (state->count == 1) {
-    register_code16(KC_F5);
-  } else if (state->count >= 1) {
-    // With double tap hard refresh
-    SEND_STRING(SS_DOWN(X_LSFT) SS_TAP(X_F5));
-    clear_keyboard();
-  }
-};
+    if (state->count == 1) {
+        if (is_mac) {
+            tap_code16(G(S(KC_5)));
+        } else {
+            tap_code16(C(S(KC_PSCR)));
+        }
+    } else {
+        if (is_mac) {
+            tap_code16(G(S(KC_4)));
+        } else {
+            tap_code16(S(KC_PSCR));
+        }
+    }
+}
 
-void reset_dance_refresh_browser(tap_dance_state_t *state, void *user_data) {
-  if (state->count == 1) {
-    unregister_code16(KC_F5);
-  }
-};
+void dance_refresh_browser(tap_dance_state_t *state, void *user_data) {
+    bool is_mac = IS_LAYER_ON(_HOMEROW_MACOS);
+
+    if (state->count == 1) {
+        if (is_mac) {
+            tap_code16(G(KC_R));
+        } else {
+            tap_code16(C(KC_R));
+        }
+    } else {
+        if (is_mac) {
+            tap_code16(S(G(KC_R)));
+        } else {
+            tap_code16(C(S(KC_R)));
+        }
+    }
+}
 
 // Tap Dance definitions
 enum {
@@ -100,10 +108,10 @@ tap_dance_action_t tap_dance_actions[] = {
   // Print screen to clipboard on single tap and store it with double
   [TD_PRT_SCR] = ACTION_TAP_DANCE_FN(dance_prt_scr),
   // F5 on single tap, SHIFT + F5 on double
-  [TD_RFS_BWR] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, start_dance_refresh_browser, reset_dance_refresh_browser),
+  [TD_RFS_BWR] = ACTION_TAP_DANCE_FN(dance_refresh_browser),
   // KC_LPAD on single tap, KC_MCTL on double
   [TD_MAC_CTL] = ACTION_TAP_DANCE_DOUBLE(KC_LPAD, KC_MCTL),
-  // Space on single tap, Tab on double
+  // Space on single quote, doubles on double
   [TD_QUO_DBL] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_DQT),
 };
 
@@ -141,8 +149,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
    [_FUNCTIONS] = LAYOUT_split_3x5_2(
         //|--------------------------------------------|       |--------------------------------------------|
-            QK_GESC,   KC_TAB, RFS_BWR, PRT_SCR, _______,        _______, _______, _______, KC_BSPC, MO(_FUNCTIONS),
-            _______, _______, _______, _______, _______,        _______, _______, _______, _______, _______,
+            QK_GESC, _______, _______, RFS_BWR, PRT_SCR,        _______, _______, _______, KC_BSPC, MO(_FUNCTIONS),
+             KC_TAB, _______, _______, _______, _______,        _______, _______, _______, _______, _______,
             _______, _______, _______, _______, _______,        _______, _______, _______, _______, _______,
         //|--------------------------------------------|       |--------------------------------------------|
                                        _______, _______,        _______, _______
