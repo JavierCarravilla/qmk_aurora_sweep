@@ -1,7 +1,11 @@
 #pragma once
 
 // Configure the global tapping term (default: 200ms)
-#define TAPPING_TERM 200
+#define TAPPING_TERM 160
+
+#define HOLD_ON_OTHER_KEY_PRESS
+#define PERMISSIVE_HOLD
+#define CHORDAL_HOLD
 
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
 #define QUICK_TAP_TERM 0
@@ -39,4 +43,6 @@
 #define MOUSEKEY_WHEEL_INTERVAL 80
 #define MOUSEKEY_WHEEL_MAX_SPEED 3
 #define MOUSEKEY_WHEEL_TIME_TO_MAX 60
+
+#define ENCODER_RESOLUTION 2
 

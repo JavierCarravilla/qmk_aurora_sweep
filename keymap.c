@@ -129,11 +129,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
    [_QWERTY] = LAYOUT_split_3x5_2(
         //|--------------------------------------------|       |---------------------------------------------|
-            KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,           KC_Y,    KC_U,    KC_I,     KC_O,    LT(_FUNCTIONS, KC_P),
+            KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,           KC_Y,    KC_U,    KC_I,     KC_O,    KC_P,
             KC_A,    LALT_KS, LSFT_KD, LCTL_KF, KC_G,           KC_H,    RCTL_KJ, RSFT_KK,  LALT_KL, KC_SCLN,
             KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,           KC_N,    KC_M,    KC_COMM,  KC_DOT,  KC_SLSH,
         //|--------------------------------------------|       |---------------------------------------------|
-                                  MO(_NUMBERS),  KC_SPC,        LT(_MOUSE, KC_ENT), MO(_SYMBOLS)
+                                  MO(_NUMBERS), KC_SPC,        LT(_FUNCTIONS, KC_ENT), MO(_SYMBOLS)
                              //|-----------------------|       |-------------------|
    ),
 
@@ -149,11 +149,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
    [_FUNCTIONS] = LAYOUT_split_3x5_2(
         //|--------------------------------------------|       |--------------------------------------------|
-            QK_GESC, _______, _______, RFS_BWR, PRT_SCR,        _______, _______, _______, KC_BSPC, MO(_FUNCTIONS),
-             KC_TAB, _______, _______, _______, _______,        _______, _______, _______, _______, _______,
+            QK_GESC, _______, _______, RFS_BWR, PRT_SCR,        G(KC_GRV), G(S(KC_LBRC)), G(S(KC_RBRC)), _______, KC_BSPC,
+             KC_TAB, _______, _______, _______, C(KC_LEFT),     C(KC_RIGHT), _______, _______, _______, _______,
             _______, _______, _______, _______, _______,        _______, _______, _______, _______, _______,
         //|--------------------------------------------|       |--------------------------------------------|
-                                       _______, _______,        _______, _______
+                                    XXXXXXX, _______,           MO(_FUNCTIONS),XXXXXXX
                         //|----------------------------|       |----------------------------|
    ),
 
@@ -241,3 +241,49 @@ void keyboard_post_init_user(void) {
   rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
 }
 #endif
+
+//Encoder
+#ifdef ENCODER_ENABLE
+bool encoder_update_user(uint8_t index, bool clockwise) {
+
+    switch (get_highest_layer(layer_state)) {
+
+        // BASE -> Scroll
+        case _HOMEROW_MACOS:
+            if (clockwise) {
+                tap_code(MS_WHLU);
+            } else {
+                tap_code(MS_WHLD);
+            }
+            break;
+        case _QWERTY:
+            if (clockwise) {
+                tap_code(MS_WHLU);
+            } else {
+                tap_code(MS_WHLD);
+            }
+            break;
+
+        // _FUNCTIONS -> Zoom
+        case _FUNCTIONS:
+            if (clockwise) {
+                tap_code16(LGUI(KC_MINS));   // Cmd +
+            } else {
+                tap_code16(LGUI(KC_EQL));  // Cmd -
+            }
+            break;
+
+        // MEDIA -> Volumen
+        case _SYMBOLS:
+            if (clockwise) {
+                tap_code(KC_VOLD);
+            } else {
+                tap_code(KC_VOLU);
+            }
+            break;
+    }
+
+    return false;
+}
+#endif
+
