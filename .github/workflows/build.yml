@@ -9,11 +9,11 @@ jobs:
       fail-fast: false
       matrix:
         keyboard:
-        - splitkb/aurora/corne/rev1
+        - splitkb/aurora/sweep/rev1
         keymap:
         - linux_dev
         build_file:
-        - splitkb_aurora_corne_rev1_linux_dev
+        - splitkb_aurora_sweep_rev1_linux_dev
 
     steps:
 
