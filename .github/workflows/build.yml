@@ -29,7 +29,7 @@ jobs:
     - name: Checkout keymap
       uses: actions/checkout@v3
       with:
-        path: keyboards/splitkb/aurora/corne/keymaps/${{ matrix.keymap }}
+        path: keyboards/splitkb/aurora/sweep/keymaps/${{ matrix.keymap }}
 
     - name: Build firmware
       run: qmk compile -kb ${{ matrix.keyboard }} -km ${{ matrix.keymap }} -e CONVERT_TO=rp2040_ce
