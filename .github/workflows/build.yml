@@ -9,7 +9,7 @@ jobs:
       fail-fast: false
       matrix:
         keyboard:
-        - splitkb/aurora/sweep/rev1
+        - splitkb/aurora/sweep
         keymap:
         - linux_dev
         build_file:
@@ -32,7 +32,7 @@ jobs:
         path: keyboards/splitkb/aurora/corne/keymaps/${{ matrix.keymap }}
 
     - name: Build firmware
-      run: qmk compile -kb ${{ matrix.keyboard }} -km ${{ matrix.keymap }}
+      run: qmk compile -kb ${{ matrix.keyboard }} -km ${{ matrix.keymap }} -e CONVERT_TO=rp2040_ce
 
     - name: Archive firmware
       uses: actions/upload-artifact@v4
